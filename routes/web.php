@@ -1,5 +1,6 @@
 <?php
 
+use App\Person;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+app()->bind('GetName',Person::class);
 Route::get('/', function () {
-    return view('welcome');
+    $name = app()->make('GetName');
+    $name->setName('Raj');
+    return $name->getName();
+    // return view('welcome');
 });
